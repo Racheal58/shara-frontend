@@ -1,0 +1,107 @@
+@import '../../assets/scss/';
+
+.btn {
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+  font-family: $raleway;
+  font-size: 14px !important;
+  height: 40px;
+  letter-spacing: .1em;
+  outline: none;
+  padding-left: 5%;
+  padding-right: 5%;
+  text-align: center;
+  transition: .2s ease-in-out;
+}
+
+.btn:focus {
+  box-shadow: none !important;
+  outline: none;
+}
+
+.btn-red {
+  background: $primary-color;
+  color: $primary-white;
+  font-weight: 600;
+
+  &:hover {
+    background: $primary-white;
+    color: $primary-color;
+  }
+}
+
+.btn-white {
+  background: $primary-white;
+  color: $primary-color;
+  font-weight: 600;
+
+  &:hover {
+    background: $primary-color;
+    color: $primary-white;
+  }
+}
+
+.btn-transparent {
+  background: transparent;
+  color: $primary-white;
+  font-weight: 600;
+
+  &:hover {
+    border: 1px solid $primary-color;
+    color: $primary-color;
+  }
+}
+
+.btn-icon {
+  align-items: center;
+  background: transparent;
+  border: 1px solid #ffffff10;
+  border-radius: 100%;
+  color: $primary-white;
+  display: flex;
+  font-weight: 600;
+  height: 37.5px;
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+  width: 37.5px;
+
+  & svg {
+    path {
+      fill: #ffffff40;
+    }
+  }
+
+  &:hover {
+    border: 2px solid $primary-color;
+
+    & svg {
+      path {
+        fill: $primary-color;
+      }
+    }
+  }
+
+  &.btn-disabled:hover {
+    border: 1px solid #ffffff10;
+    cursor: not-allowed;
+
+    & svg {
+      path {
+        fill: #ffffff40;
+      }
+    }
+  }
+}
+
+.btn-icon.btn-icon-red {
+  background: $primary-color;
+
+  & svg {
+    path {
+      fill: #fff;
+    }
+  }
+}
+

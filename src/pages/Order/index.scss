@@ -1,0 +1,54 @@
+@import '../../assets/scss/';
+
+.orders {
+  .navbar {
+    border-bottom: 1px solid $primary-grey;
+    position: fixed;
+    width: 100%;
+    padding: 0 20px;
+    height: 50px;
+    z-index: 2;
+    top: 0;
+    background-color: $primary-color;
+
+    .navbar-brand {
+      color: $primary-white;
+    }
+  }
+
+  .order-container {
+    padding: 15px 20%;
+    margin-top: 50px;
+
+    th {
+      white-space: nowrap;
+    }
+
+    tr {
+      margin-bottom: 10px;
+    }
+
+    .spacer {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+
+    .table-image-thumbnail {
+      width: 50px;
+      height: 50px;
+    }
+  }
+
+  .footer {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    background-color: $primary-white;
+    height: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 0 20%;
+    border-top: 1px solid $primary-color;
+  }
+}

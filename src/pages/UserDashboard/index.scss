@@ -1,0 +1,132 @@
+@import '../../assets/scss';
+
+.admin-dashboard {
+  width: 100%;
+
+  .navbar {
+    border-bottom: 1px solid $primary-grey;
+    position: fixed;
+    width: 100%;
+    padding: 0 20px;
+    height: 50px;
+    z-index: 2;
+    top: 0;
+    background-color: $primary-color;
+
+    .navbar-brand {
+      color: $primary-white;
+    }
+  }
+
+  .sidebar {
+    border-right: 1px solid $primary-grey;
+    margin-top: 50px;
+    position: fixed;
+    min-height: 100%;
+    height: 100%;
+    z-index: 2;
+    padding-top: 15px;
+
+    .nav {
+      &.nav-pills {
+        height: -webkit-fill-available;
+
+        .nav-link {
+          border-radius: 0;
+          padding: 0.8rem 1.5rem;
+          color: $primary-black;
+          font-size: 14px;
+
+          &.active {
+            background-color: transparent;
+            color: $primary-color;
+            border-left: 2px solid $primary-color;
+          }
+
+          &:hover {
+            color: $primary-color;
+          }
+
+          &.logout {
+            position: absolute;
+            bottom: 50px;
+          }
+        }
+      }
+    }
+  }
+
+  .main-content {
+    margin-top: 50px;
+    margin-left: 16.666667%;
+    z-index: 1;
+
+    .tab-pane {
+      padding: 15px 20px;
+
+      .card {
+        min-width: 320px;
+        max-width: 320px;
+        width: 320px;
+        margin-bottom: 20px;
+
+        .card-image-container {
+          height: 250px;
+        }
+
+        .card-img-top {
+          height: 250px;
+        }
+
+        .card-body {
+          .card-title {
+            font-size: 18px;
+          }
+          .card-text {
+            font-size: 14px;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .widget-upload-btn {
+    border-radius: 100%;
+    width: 100px;
+    height: 100px;
+    border: 2px solid $secondary-grey;
+    padding: 0;
+    position: relative;
+
+    i {
+      color: $secondary-grey;
+    }
+
+    .screen {
+      border-radius: 100%;
+      width: 100px;
+      height: 100px;
+      background-color: $secondary-grey;
+      opacity: 0.9;
+      display: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .image-thumbnail {
+      border-radius: 100%;
+      width: 100px;
+      height: 100px;
+    }
+
+    &:hover {
+      border: none;
+      .screen {
+        display: flex;
+        color: $primary-white;
+      }
+    }
+  }
+}

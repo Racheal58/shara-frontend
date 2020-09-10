@@ -1,0 +1,44 @@
+@import './variables';
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+a,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+div {
+  font-family: $raleway;
+}
+
+body {
+  font-size: 16px;
+}
+
+.btn {
+  font-size: 14px;
+}
+
+.btn-custom {
+  color: $primary-white;
+  background-color: $primary-color;
+  border-color: $primary-color;
+
+  &:hover {
+    color: $primary-white;
+  }
+}
+
+.text-custom {
+  color: $primary-color;
+}
+
+.text-underline {
+  text-decoration: underline;
+}

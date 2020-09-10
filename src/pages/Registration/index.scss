@@ -1,0 +1,57 @@
+@import '../../assets/scss/';
+
+.auth-container.register {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  max-height: 100vh;
+  min-height: 100vh;
+
+  .form {
+    max-width: 350px;
+    width: 350px;
+
+    .title {
+      color: $primary-color;
+      font-size: 60px;
+      font-style: normal;
+      font-weight: 800;
+      letter-spacing: 0.32px;
+      line-height: 64px;
+      margin-bottom: 45px;
+    }
+
+    .sub-text {
+      color: $primary-color;
+      font-size: 15.75px;
+      font-style: normal;
+      font-weight: normal;
+      letter-spacing: 0;
+      line-height: 19.5px;
+      margin-bottom: 27.75px;
+    }
+
+    .label {
+      color: $secondary-grey;
+      margin-bottom: 0;
+    }
+
+    .form-control {
+      border: 0;
+      border-bottom: 1px solid $primary-color;
+      background-color: transparent;
+      border-radius: 0;
+      margin-top: 0rem;
+      padding: .375rem .75rem .375rem 0;
+      color: $primary-color;
+
+      &:focus {
+        box-shadow: none;
+      }
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+    }
+  }
+}

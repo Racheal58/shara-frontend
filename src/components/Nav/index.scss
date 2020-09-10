@@ -1,0 +1,27 @@
+@import '../../assets/scss/index';
+
+.navbar {
+  padding: 0.25rem 50px;
+
+  .navbar-brand {
+    color: $primary-color;
+    font-family: $sacramento;
+    font-size: 24px;
+  }
+}
+
+@media screen and (max-width: 625px) {
+  // .navbar {
+  //   background: $custom-black;
+  //   box-shadow: 1px 2px 2px 2px rgba(0, 0, 0, 0.8);
+  //   padding: 20px !important;
+  //   position: sticky;
+  //   top: 0;
+  //   width: -webkit-fill-available;
+  //   z-index: 2;
+
+  //   .navbar-brand {
+  //     font-size: 15px;
+  //   }
+  // }
+}

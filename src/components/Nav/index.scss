@@ -11,17 +11,12 @@
 }
 
 @media screen and (max-width: 625px) {
-  // .navbar {
-  //   background: $custom-black;
-  //   box-shadow: 1px 2px 2px 2px rgba(0, 0, 0, 0.8);
-  //   padding: 20px !important;
-  //   position: sticky;
-  //   top: 0;
-  //   width: -webkit-fill-available;
-  //   z-index: 2;
+  .navbar {
+    height: fit-content;
+    padding: 10px 20px !important;
 
-  //   .navbar-brand {
-  //     font-size: 15px;
-  //   }
-  // }
+    .navbar-brand {
+      font-size: 15px;
+    }
+  }
 }

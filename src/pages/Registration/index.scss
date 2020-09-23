@@ -42,7 +42,7 @@
       background-color: transparent;
       border-radius: 0;
       margin-top: 0rem;
-      padding: .375rem .75rem .375rem 0;
+      padding: 0.375rem 0.75rem 0.375rem 0;
       color: $primary-color;
 
       &:focus {
@@ -52,6 +52,34 @@
 
     .form-group {
       margin-bottom: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .auth-container.register {
+    height: fit-content;
+    max-height: fit-content;
+    min-height: 100vh;
+
+    .navbar {
+      position: fixed;
+      width: 100%;
+      z-index: 2;
+      top: 0;
+      background: $primary-white;
+    }
+
+    .form {
+      max-width: 350px;
+      width: 90%;
+      margin: 61px 0 30px;
+
+      .title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 25px;
+      }
     }
   }
 }

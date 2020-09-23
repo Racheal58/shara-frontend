@@ -16,18 +16,32 @@
     }
   }
 
+  .btn-fit-content {
+    width: fit-content;
+    flex: 1;
+  }
+
   .products-container {
     padding: 15px 20%;
     margin-top: 50px;
 
     .cart-div {
       position: relative;
+
+      .cart-btn {
+        display: flex;
+        justify-content: center;
+
+        &:hover {
+          border: 0;
+          color: initial;
+        }
+      }
       .cart-length {
         position: absolute;
         color: $primary-white;
-        font-size: 20px;
+        font-size: 18px;
         top: 18px;
-        right: 33px;
       }
     }
 

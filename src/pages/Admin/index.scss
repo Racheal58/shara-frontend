@@ -50,6 +50,7 @@
           &.logout {
             position: absolute;
             bottom: 50px;
+            width: 100%;
           }
         }
       }
@@ -60,6 +61,14 @@
     margin-top: 50px;
     margin-left: 16.666667%;
     z-index: 1;
+
+    .hide-lg {
+      display: none;
+    }
+
+    .hide-table-sm {
+      display: table;
+    }
 
     .tab-pane {
       padding: 15px 20px;
@@ -126,6 +135,145 @@
       .screen {
         display: flex;
         color: $primary-white;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .admin-dashboard {
+    width: 100%;
+
+    .btn-fit-content {
+      width: fit-content;
+      flex: 1;
+    }
+
+    .navbar {
+      padding: 10px 20px !important;
+      height: fit-content !important;
+    }
+
+    .sidebar {
+      border-right: 0 !important;
+      margin-top: 0 !important;
+      min-height: fit-content !important;
+      height: fit-content !important;
+      padding-top: 0 !important;
+      bottom: 0;
+      background: $primary-white;
+      border-top: 0.5px solid #929292;
+
+      .nav {
+        &.flex-column {
+          flex-direction: row !important;
+        }
+
+        &.nav-pills {
+          height: -webkit-fill-available;
+
+          .nav-link {
+            border-radius: 0;
+            padding: 15px 0 !important;
+            color: #999 !important;
+            font-size: 18px !important;
+            width: 100%;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+
+            &.active {
+              background-color: transparent;
+              color: $primary-color !important;
+              border-left: 0 !important;
+            }
+
+            span {
+              display: none;
+            }
+
+            &:hover {
+              color: $primary-color;
+            }
+
+            &.logout {
+              display: none;
+            }
+          }
+        }
+      }
+    }
+
+    .main-content {
+      margin-top: 61px !important;
+      margin-left: 0 !important;
+      margin-bottom: 40px;
+
+      .tab-pane {
+        padding: 15px 0 !important;
+
+        .btn-div {
+          padding: 0 20px 0 0 !important;
+        }
+
+        .card-deck {
+          padding: 0 20px !important;
+
+          .card {
+            min-width: 100%;
+            max-width: fit-content;
+            width: fit-content;
+          }
+        }
+
+        .hide-table-sm {
+          display: none;
+        }
+
+        .card-container {
+          grid-template-columns: repeat(1, 100%) !important;
+          padding: 0 20px !important;
+
+          &.hide-lg {
+            display: grid;
+          }
+
+          .card {
+            &.order-card {
+              min-width: 100%;
+              max-width: fit-content;
+              width: fit-content;
+
+              .card-text {
+                color: #555;
+                margin-bottom: 5px;
+                font-weight: bold;
+                font-size: 14px;
+
+                .result {
+                  font-weight: normal;
+                  font-size: 12px;
+
+                  &.id {
+                    color: #14acf2;
+                  }
+
+                  &.date {
+                    color: #b39d2d;
+                  }
+
+                  &.items {
+                    color: #555;
+                  }
+
+                  &.price {
+                    color: green;
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

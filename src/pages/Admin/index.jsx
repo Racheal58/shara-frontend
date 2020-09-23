@@ -142,12 +142,12 @@ const createProductModal = (
             <div className="modal-footer d-flex justify-content-between border-top-0 p-0">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-secondary btn-fit-content"
                 data-dismiss="modal"
               >
                 Close
               </button>
-              <button type="submit" className="btn btn-custom">
+              <button type="submit" className="btn btn-custom  btn-fit-content">
                 {isLoading ? <FadeOut /> : 'Create'}
               </button>
             </div>
@@ -283,12 +283,12 @@ const editProductModal = (
             <div className="modal-footer d-flex justify-content-between border-top-0 p-0">
               <button
                 type="button"
-                className="btn btn-secondary"
+                className="btn btn-secondary btn-fit-content"
                 data-dismiss="modal"
               >
                 Cancel
               </button>
-              <button type="submit" className="btn btn-custom">
+              <button type="submit" className="btn btn-custom btn-fit-content">
                 {isLoading ? <FadeOut /> : 'Save'}
               </button>
             </div>
@@ -401,6 +401,9 @@ const Admin = props => {
       );
   };
 
+  const handleTotalPrice = products =>
+    products.reduce((a, b) => a + Number(b.price * b.quantity), 0);
+
   return (
     <section className="admin-dashboard">
       <div>
@@ -408,8 +411,8 @@ const Admin = props => {
       </div>
 
       <main className="d-flex justify-content-center">
-        <div className="row w-100">
-          <div className="col-2 px-0 sidebar">
+        <div className="row w-100 px-0">
+          <div className="col-12 col-lg-2 px-0 sidebar">
             <div
               className="nav flex-column nav-pills"
               id="v-pills-tab"
@@ -425,8 +428,8 @@ const Admin = props => {
                 aria-controls="v-pills-home"
                 aria-selected="true"
               >
-                <i className="fas fa-box-open mr-3" />
-                Products
+                <i className="fas fa-box-open mr-0 mr-lg-3" />
+                <span>Products</span>
               </a>
               <a
                 className="nav-link"
@@ -437,8 +440,8 @@ const Admin = props => {
                 aria-controls="v-pills-profile"
                 aria-selected="false"
               >
-                <i className="fas fa-shopping-cart mr-3" />
-                Orders
+                <i className="fas fa-shopping-cart mr-0 mr-lg-3" />
+                <span>Orders</span>
               </a>
               <a
                 className="nav-link"
@@ -449,8 +452,8 @@ const Admin = props => {
                 aria-controls="v-pills-messages"
                 aria-selected="false"
               >
-                <i className="fas fa-users mr-3" />
-                Users
+                <i className="fas fa-users mr-0 mr-lg-3" />
+                <span>Users</span>
               </a>
 
               <a
@@ -458,22 +461,17 @@ const Admin = props => {
                 id="v-pills-messages-tab"
                 data-toggle="pill"
                 href="#"
-                role="tab"
-                aria-controls="v-pills-messages"
+                role="button"
+                aria-controls="button"
                 aria-selected="false"
+                onClick={() => logout()}
               >
-                <button
-                  type="button"
-                  className="btn btn-transparent w-100"
-                  onClick={() => logout()}
-                >
-                  <i className="fas fa-sign-out-alt mr-3" />
-                  Logout
-                </button>
+                <i className="fas fa-sign-out-alt mr-3" />
+                Logout
               </a>
             </div>
           </div>
-          <div className="col-10 px-0 main-content">
+          <div className="col-12 col-lg-2 px-0 main-content">
             <div className="tab-content" id="v-pills-tabContent">
               <div
                 className="tab-pane fade show active"
@@ -482,7 +480,7 @@ const Admin = props => {
                 aria-labelledby="v-pills-home-tab"
               >
                 <div>
-                  <div className="mb-3">
+                  <div className="mb-3 text-right text-lg-left btn-div">
                     <button
                       type="button"
                       className="btn btn-custom"
@@ -507,7 +505,8 @@ const Admin = props => {
                             <h5 className="card-title">{product.name}</h5>
                             <p className="card-text">{product.description}</p>
                             <p className="card-text">
-                              Price: &#36;{product.price}
+                              Price: &#8358;
+                              {parseInt(product.price).toLocaleString()}
                             </p>
                           </div>
                           <div className="card-footer bg-transparent d-flex justify-content-between">
@@ -547,13 +546,14 @@ const Admin = props => {
                 role="tabpanel"
                 aria-labelledby="v-pills-profile-tab"
               >
-                <table className="table table-striped table-bordered table-hover">
+                <table className="table table-striped table-bordered table-hover hide-table-sm">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Order Id</th>
                       <th scope="col">User Id</th>
-                      <th scope="col">Products Count</th>
+                      <th scope="col">No of Items</th>
+                      <th scope="col">Total Price</th>
                       <th scope="col">Completed</th>
                       <th scope="col">Created At</th>
                       <th scope="col">Updated At</th>
@@ -568,6 +568,12 @@ const Admin = props => {
                           <td>{order._id}</td>
                           <td>{order.userId}</td>
                           <td>{order.products.length}</td>
+                          <td>
+                            &#8358;
+                            {parseInt(
+                              handleTotalPrice(order.products),
+                            ).toLocaleString()}
+                          </td>
                           <td>{order.isCompleted.toString()}</td>
                           <td>
                             {moment(order.created_at).format('DD MMM YYYY')}
@@ -580,6 +586,43 @@ const Admin = props => {
                       ))}
                   </tbody>
                 </table>
+
+                <div className="card-container hide-lg">
+                  {props.orders.length > 0 &&
+                    props.orders.map(order => (
+                      <div className="card order-card" key={order._id}>
+                        <div className="card-body">
+                          <p className="card-text">
+                            Order ID:{' '}
+                            <span className="result id">{order._id}</span>
+                          </p>
+                          <p className="card-text">
+                            Order Date:{' '}
+                            <span className="result date">
+                              {moment(order.created_at).format(
+                                'ddd, DD MMM YYYY',
+                              )}
+                            </span>
+                          </p>
+                          <p className="card-text">
+                            No of Items:{' '}
+                            <span className="result items">
+                              {order.products.length}
+                            </span>
+                          </p>
+                          <p className="card-text">
+                            Total Price:{' '}
+                            <span className="result price">
+                              &#8358;
+                              {parseInt(
+                                handleTotalPrice(order.products),
+                              ).toLocaleString()}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                </div>
               </div>
               <div
                 className="tab-pane fade"
@@ -587,7 +630,7 @@ const Admin = props => {
                 role="tabpanel"
                 aria-labelledby="v-pills-messages-tab"
               >
-                <table className="table table-striped table-bordered table-hover">
+                <table className="table table-striped table-bordered table-hover  hide-table-sm">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
@@ -614,6 +657,43 @@ const Admin = props => {
                       ))}
                   </tbody>
                 </table>
+                <div className="card-container hide-lg">
+                  {props.users.length > 0 &&
+                    props.users.map(user => (
+                      <div className="card order-card" key={user._id}>
+                        <div className="card-body">
+                          <p className="card-text">
+                            Full Name:{' '}
+                            <span className="result id">
+                              {user.first_name} {user.last_name}
+                            </span>
+                          </p>
+                          <p className="card-text">
+                            Email:{' '}
+                            <span className="result date">{user.email}</span>
+                          </p>
+                          <p className="card-text">
+                            Phone Number:{' '}
+                            <span className="result items">
+                              {user.phone_number}
+                            </span>
+                          </p>
+                          <p className="card-text">
+                            Total Price:{' '}
+                            {user.isAdmin ? (
+                              <span className="result price">
+                                {user.isAdmin}
+                              </span>
+                            ) : (
+                              <span className="result text-danger">
+                                {user.isAdmin}
+                              </span>
+                            )}
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                </div>
               </div>
             </div>
           </div>

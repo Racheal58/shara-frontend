@@ -59,7 +59,7 @@ const Authentication = props => {
               disabled={disabled}
             />
           </div>
-          <div className="form-group mb-0">
+          <div className="form-group">
             <label className="label" htmlFor="exampleInputPassword1">
               Password
             </label>
@@ -76,13 +76,6 @@ const Authentication = props => {
               value={password}
               disabled={disabled}
             />
-          </div>
-          <div className="d-flex justify-content-end my-3">
-            <Link to="/forgot-password" className="btn-link">
-              <button type="button" className="btn forgot-password-btn">
-                Forgot Password
-              </button>
-            </Link>
           </div>
           <button
             type="submit"

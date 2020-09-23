@@ -113,7 +113,7 @@ const Registration = props => {
             />
           </div>
           <div className="form-row">
-            <div className="form-group col-md-3">
+            <div className="form-group col-3 col-md-3">
               <label className="label" htmlFor="inputZip">
                 Country
               </label>
@@ -126,7 +126,7 @@ const Registration = props => {
                 {CountryOptions}
               </select>
             </div>
-            <div className="form-group col-md-9">
+            <div className="form-group col-9 col-md-9">
               <label className="label" htmlFor="exampleInputPassword1">
                 Phone number
               </label>

@@ -150,7 +150,6 @@ export const removeProductFromOrder = (
     const {
       data: { order },
     } = await removeProductFromOrderRequest(orderId, productId);
-    // const newProducts = products.filter(product => product._id !== productId);
     dispatch({ type: REMOVE_PRODUCT_FROM_ORDER_SUCCESS, payload: order });
     toast.success('Product has been successfully removed from order');
   } catch (error) {

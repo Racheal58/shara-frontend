@@ -6,7 +6,7 @@ import moment from 'moment';
 import Nav from '../../components/Nav';
 
 // actions
-import { getOrders } from '../../store/modules/orders';
+import { getUserOrders } from '../../store/modules/orders';
 
 import { logout } from '../../api/helpers';
 
@@ -16,10 +16,13 @@ import './index.scss';
 const UserDashboard = props => {
   React.useEffect(() => {
     const fetchOrders = async () => {
-      await props.getOrders();
+      await props.getUserOrders();
     };
     fetchOrders();
   }, []);
+
+  const handleTotalPrice = products =>
+    products.reduce((a, b) => a + Number(b.price * b.quantity), 0);
 
   return (
     <section className="admin-dashboard">
@@ -29,7 +32,7 @@ const UserDashboard = props => {
 
       <main className="d-flex justify-content-center">
         <div className="row w-100">
-          <div className="col-2 px-0 sidebar">
+          <div className="col-12 col-lg-2 px-0 sidebar">
             <div
               className="nav flex-column nav-pills"
               id="v-pills-tab"
@@ -46,7 +49,7 @@ const UserDashboard = props => {
                 aria-selected="false"
               >
                 <i className="fas fa-shopping-cart mr-3" />
-                Orders
+                <span>Orders</span>
               </a>
 
               <a
@@ -54,22 +57,17 @@ const UserDashboard = props => {
                 id="v-pills-messages-tab"
                 data-toggle="pill"
                 href="#"
-                role="tab"
-                aria-controls="v-pills-messages"
+                role="button"
+                aria-controls="button"
                 aria-selected="false"
+                onClick={() => logout()}
               >
-                <button
-                  type="button"
-                  className="btn btn-transparent w-100"
-                  onClick={() => logout()}
-                >
-                  <i className="fas fa-sign-out-alt mr-3" />
-                  Logout
-                </button>
+                <i className="fas fa-sign-out-alt mr-3" />
+                Logout
               </a>
             </div>
           </div>
-          <div className="col-10 px-0 main-content">
+          <div className="col-12 col-lg-10 px-0 main-content">
             <div className="tab-content" id="v-pills-tabContent">
               <div
                 className="tab-pane active"
@@ -77,13 +75,13 @@ const UserDashboard = props => {
                 role="tabpanel"
                 aria-labelledby="v-pills-profile-tab"
               >
-                <table className="table table-striped table-bordered table-hover">
+                <table className="table table-striped table-bordered table-hover hide-table-sm">
                   <thead>
                     <tr>
                       <th scope="col">#</th>
                       <th scope="col">Order Id</th>
-                      <th scope="col">User Id</th>
-                      <th scope="col">Products Count</th>
+                      <th scope="col">No of Items</th>
+                      <th scope="col">Total Price</th>
                       <th scope="col">Completed</th>
                       <th scope="col">Created At</th>
                       <th scope="col">Updated At</th>
@@ -91,13 +89,18 @@ const UserDashboard = props => {
                     </tr>
                   </thead>
                   <tbody>
-                    {props.orders.length > 0 &&
-                      props.orders.map((order, index) => (
+                    {props.userOrders.length > 0 &&
+                      props.userOrders.map((order, index) => (
                         <tr key={order._id}>
                           <th scope="row">{index + 1}</th>
                           <td>{order._id}</td>
-                          <td>{order.userId}</td>
                           <td>{order.products.length}</td>
+                          <td>
+                            &#8358;
+                            {parseInt(
+                              handleTotalPrice(order.products),
+                            ).toLocaleString()}
+                          </td>
                           <td>{order.isCompleted.toString()}</td>
                           <td>
                             {moment(order.created_at).format('DD MMM YYYY')}
@@ -110,6 +113,54 @@ const UserDashboard = props => {
                       ))}
                   </tbody>
                 </table>
+
+                <div className="card-container hide-lg">
+                  {props.userOrders.length > 0 &&
+                    props.userOrders.map(order => (
+                      <div className="card order-card" key={order._id}>
+                        <div className="card-body">
+                          {order.isCompleted ? (
+                            <i
+                              className="fas fa-check-circle text-success completed_status"
+                              style={{ fontSize: 20 }}
+                            />
+                          ) : (
+                            <i
+                              className="fas fa-circle-notch text-warning completed_status"
+                              style={{ fontSize: 20 }}
+                            />
+                          )}
+                          <p className="card-text">
+                            Order ID:{' '}
+                            <span className="result id">{order._id}</span>
+                          </p>
+                          <p className="card-text">
+                            Order Date:{' '}
+                            <span className="result date">
+                              {moment(order.created_at).format(
+                                'ddd, DD MMM YYYY',
+                              )}
+                            </span>
+                          </p>
+                          <p className="card-text">
+                            No of Items:{' '}
+                            <span className="result items">
+                              {order.products.length}
+                            </span>
+                          </p>
+                          <p className="card-text">
+                            Total Price:{' '}
+                            <span className="result price">
+                              &#8358;
+                              {parseInt(
+                                handleTotalPrice(order.products),
+                              ).toLocaleString()}
+                            </span>
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                </div>
               </div>
             </div>
           </div>
@@ -119,10 +170,10 @@ const UserDashboard = props => {
   );
 };
 
-const matchStateToProps = ({ order: { orders } }) => ({
-  orders,
+const matchStateToProps = ({ order: { userOrders } }) => ({
+  userOrders,
 });
 
 export default connect(matchStateToProps, {
-  getOrders,
+  getUserOrders,
 })(UserDashboard);

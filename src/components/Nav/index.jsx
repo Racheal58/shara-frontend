@@ -18,7 +18,7 @@ const Nav = ({ children }) => {
         Shara Shoes
       </Link>
       <button
-        className="navbar-toggler"
+        className="navbar-toggler bg-white"
         type="button"
         data-toggle="collapse"
         data-target="#navbarTogglerDemo02"
@@ -46,7 +46,7 @@ const Nav = ({ children }) => {
                   </Link>
                 </li>
               ) : (
-                <li className="nav-item ml-5">
+                <li className="nav-item ml-0 ml-lg-5">
                   <Link className="nav-link text-white" to="/dashboard">
                     {first_name.replace(
                       first_name[0],
@@ -60,7 +60,7 @@ const Nav = ({ children }) => {
                 <button
                   type="button"
                   onClick={() => logout()}
-                  className="btn btn-transparent nav-link text-white ml-3"
+                  className="btn btn-transparent nav-link text-white ml-0 ml-lg-3"
                   to="/products"
                 >
                   <i className="fas fa-sign-out-alt mr-3" />
@@ -75,7 +75,7 @@ const Nav = ({ children }) => {
                   Register
                 </Link>
               </li>
-              <li className="nav-item ml-5">
+              <li className="nav-item ml-0 ml-lg-5">
                 <Link className="nav-link text-white" to="/authenticate">
                   Login
                 </Link>

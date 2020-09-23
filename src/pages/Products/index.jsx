@@ -47,7 +47,7 @@ const Products = props => {
       <Nav />
       <section className="products-container">
         <div className="d-flex justify-content-end mb-3 cart-div">
-          <Link to="/order" className="btn btn-transparent ">
+          <Link to="/order" className="btn btn-transparent px-0 cart-btn">
             <i className="fas fa-box-open text-custom fa-3x" />
             <p className="cart-length">{props.cartLength}</p>
           </Link>
@@ -66,7 +66,9 @@ const Products = props => {
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-text">{product.description}</p>
-                  <p className="card-text">Price: &#36;{product.price}</p>
+                  <p className="card-text">
+                    Price: &#8358;{parseInt(product.price).toLocaleString()}
+                  </p>
                 </div>
                 <div className="card-footer bg-transparent d-flex justify-content-between">
                   <button
@@ -126,12 +128,15 @@ const Products = props => {
                 <div className="modal-footer d-flex justify-content-between border-top-0 p-0">
                   <button
                     type="button"
-                    className="btn btn-secondary"
+                    className="btn btn-secondary btn-fit-content"
                     data-dismiss="modal"
                   >
                     Cancel
                   </button>
-                  <button type="submit" className="btn btn-custom">
+                  <button
+                    type="submit"
+                    className="btn btn-custom btn-fit-content"
+                  >
                     {props.isLoading ? <FadeOut /> : 'Add to Cart'}
                   </button>
                 </div>

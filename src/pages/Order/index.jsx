@@ -23,6 +23,7 @@ const Order = ({
   removeProductFromOrder: removeProductFromOrderFunction,
   editProductQuantity: editProductQuantityFunction,
   history,
+  isLoading,
 }) => {
   const [editItemQuantity, setEditItemQuantity] = React.useState(0);
   const [editItemId, setEditItemId] = React.useState(0);
@@ -41,7 +42,7 @@ const Order = ({
 
   const handleCompleteUserOrderFunction = async () => {
     await completeUserOrderFunction(userOrder._id);
-    history.redirect('/dashbpard');
+    history.redirect('/dashboard');
   };
 
   return (
@@ -50,7 +51,7 @@ const Order = ({
       <div className="order-container">
         <p>Your order</p>
 
-        <table className="table table-striped table-hover">
+        <table className="table table-striped table-hover hide-table-sm">
           <thead>
             <tr className="border">
               <th scope="col">#</th>
@@ -66,55 +67,100 @@ const Order = ({
           <tbody>
             {Object.keys(userOrder).length > 0 &&
               userOrder.products.map((item, index) => (
-                <>
-                  <tr key={item._id}>
-                    <th scope="row">{index + 1}</th>
-                    <td>
-                      <img
-                        src={item.imageUrl}
-                        alt={item.imageUrl}
-                        className="table-image-thumbnail"
-                      />
-                    </td>
-                    <td>{item.name}</td>
-                    <td>{item.description}</td>
-                    <td className="text-right">
-                      {Number(item.quantity)}
-                      <button
-                        type="button"
-                        className="btn btn-custom w-100"
-                        data-toggle="modal"
-                        data-target="#exampleModal"
-                        onClick={() =>
-                          handleQuantityChange(item.quantity, item._id)
-                        }
-                      >
-                        <i className="fas fa-pen" />
-                      </button>
-                    </td>
-                    <td className="text-right">{item.price}</td>
-                    <td className="text-right">
-                      {Number(item.price) * Number(item.quantity)}
-                    </td>
-                    <td>
-                      <button
-                        type="button"
-                        className="btn btn-transparent w-100"
-                        onClick={() =>
-                          removeProductFromOrderFunction(
-                            userOrder._id,
-                            item._id,
-                          )
-                        }
-                      >
-                        <i className="fas fa-times text-danger fa-lg" />
-                      </button>
-                    </td>
-                  </tr>
-                </>
+                <tr key={item._id}>
+                  <th scope="row">{index + 1}</th>
+                  <td>
+                    <img
+                      src={item.imageUrl}
+                      alt={item.imageUrl}
+                      className="table-image-thumbnail"
+                    />
+                  </td>
+                  <td>{item.name}</td>
+                  <td>{item.description}</td>
+                  <td className="text-right">
+                    {Number(item.quantity)}
+                    <button
+                      type="button"
+                      className="btn btn-custom w-100"
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                      onClick={() =>
+                        handleQuantityChange(item.quantity, item._id)
+                      }
+                    >
+                      <i className="fas fa-pen" />
+                    </button>
+                  </td>
+                  <td className="text-right">
+                    {parseInt(item.price).toLocaleString()}
+                  </td>
+                  <td className="text-right">
+                    {Number(item.price.toLocaleString()) *
+                      Number(item.quantity)}
+                  </td>
+                  <td>
+                    <button
+                      type="button"
+                      className="btn btn-transparent w-100"
+                      onClick={() =>
+                        removeProductFromOrderFunction(userOrder._id, item._id)
+                      }
+                    >
+                      <i className="fas fa-times text-danger fa-lg" />
+                    </button>
+                  </td>
+                </tr>
               ))}
           </tbody>
         </table>
+        <div className="card-container hide-lg">
+          {Object.keys(userOrder).length > 0 &&
+            userOrder.products.map(item => (
+              <div className="card product-card" key={item._id}>
+                <div className="card-body d-flex flex-column">
+                  <div className="d-flex pb-3">
+                    <div className="product-card-img-container">
+                      <img
+                        src={item.imageUrl}
+                        className="product-card-img"
+                        alt="..."
+                      />
+                    </div>
+                    <div className="details-container">
+                      <p className="card-text">{item.name}</p>
+                      <p className="card-text price">
+                        &#8358;
+                        {parseInt(item.price).toLocaleString()}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="card-footer p-0 d-flex justify-content-between align-items-center bg-transparent">
+                    <button
+                      type="button"
+                      data-toggle="modal"
+                      data-target="#exampleModal"
+                      onClick={() =>
+                        handleQuantityChange(item.quantity, item._id)
+                      }
+                      className="btn btn-transparent rounded-circle d-flex justify-content-center align-items-center p-0 edit"
+                    >
+                      <i className="fas fa-edit text-custom" />
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        removeProductFromOrderFunction(userOrder._id, item._id)
+                      }
+                      className="btn btn-danger rounded-circle d-flex justify-content-center align-items-center p-0 delete"
+                    >
+                      <i className="fas fa-times" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+        </div>
 
         <div
           className="modal fade"
@@ -139,9 +185,7 @@ const Order = ({
                 </button>
               </div>
               <div className="modal-body">
-                <form
-                // onSubmit={e => addProductToCart(e, item)}
-                >
+                <form>
                   <div className="form-group">
                     <label htmlFor="exampleInputEmail1">
                       How many do you want to buy ?
@@ -161,14 +205,14 @@ const Order = ({
                   <div className="modal-footer d-flex justify-content-between border-top-0 p-0">
                     <button
                       type="button"
-                      className="btn btn-secondary"
+                      className="btn btn-secondary btn-fit-content"
                       data-dismiss="modal"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
-                      className="btn btn-custom"
+                      className="btn btn-custom btn-fit-content"
                       onClick={e => {
                         e.preventDefault();
                         editProductQuantityFunction(
@@ -178,7 +222,7 @@ const Order = ({
                         );
                       }}
                     >
-                      {/* {props.isLoading ? <FadeOut /> : 'Add to Cart'} */}
+                      {isLoading ? <FadeOut /> : 'Add to Cart'}
                     </button>
                   </div>
                 </form>
@@ -194,15 +238,16 @@ const Order = ({
           className="btn btn-custom"
           onClick={() => handleCompleteUserOrderFunction()}
         >
-          Completed Order
+          Complete Order
         </button>
       </footer>
     </section>
   );
 };
 
-const mapStateToProps = ({ product: { userOrder } }) => ({
+const mapStateToProps = ({ product: { userOrder, isLoading } }) => ({
   userOrder,
+  isLoading,
 });
 
 export default connect(mapStateToProps, {

@@ -66,3 +66,31 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  .auth-container.login {
+    height: fit-content;
+    max-height: fit-content;
+    min-height: 100vh;
+
+    .navbar {
+      position: fixed;
+      width: 100%;
+      z-index: 2;
+      top: 0;
+      background: $primary-white;
+    }
+
+    .form {
+      max-width: 350px;
+      width: 90%;
+      margin: 61px 0 30px;
+
+      .title {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 25px;
+      }
+    }
+  }
+}

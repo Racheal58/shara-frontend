@@ -64,6 +64,7 @@
 
 @media screen and (max-width: 625px) {
   .footer {
+    background: $primary-color;
     .upper {
       height: fit-content;
       padding: 20px 20px;
@@ -80,10 +81,15 @@
     .bottom {
       display: block;
       height: fit-content;
-      padding: 20px;
+      padding: 0 20px 20px;
 
       .footer-group {
         margin-bottom: 15px;
+        color: #fff;
+
+        .footer-link {
+          color: #fff;
+        }
 
         &:last-child {
           margin-bottom: 0;

@@ -9,10 +9,7 @@ export const isAdmin = () => {
   return data.isAdmin === 'true';
 };
 
-export const setToken = token => {
-  localStorage.setItem('token', token);
-  return getToken();
-};
+export const setToken = async token => localStorage.setItem('token', token);
 
 export const getToken = () => localStorage.getItem('token');
 
@@ -21,22 +18,26 @@ export const destroyToken = () => {
   return null;
 };
 
-export const encodeUserObject = (user, expiresIn = '30days') => {
-  const encodedUser = jwt.sign(user, KEY, { expiresIn });
-  return localStorage.setItem('encodedUser', encodedUser);
-};
+export const encodeUserObject = async user =>
+  localStorage.setItem(
+    'encodedUser',
+    jwt.sign(user, KEY, { expiresIn: '3000days' }),
+  );
 
-export const getEncodedUser = () => {
-  const encodedUser = localStorage.getItem('encodedUser');
-  return decodeToken(encodedUser);
-};
+export const decodeUserObject = () =>
+  decodeToken(localStorage.getItem('encodedUser'));
 
 export const destroyEncodedUser = () => {
   localStorage.removeItem('encodedUser');
   return null;
 };
 
+export const setRedirectUrl = url => localStorage.setItem('redirectUrl', url);
+export const removeRedirectUrl = () => localStorage.removeItem('redirectUrl');
+
 export const logout = () => {
   destroyToken();
+  destroyEncodedUser();
+  removeRedirectUrl();
   window.location.assign('/authenticate');
 };

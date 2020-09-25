@@ -1,17 +1,17 @@
 @import '../../assets/scss';
 
-.admin-dashboard {
+.user-dashboard {
   width: 100%;
 
   .navbar {
-    border-bottom: 1px solid $primary-grey;
-    position: fixed;
-    width: 100%;
-    padding: 0 20px;
-    height: 50px;
-    z-index: 2;
-    top: 0;
     background-color: $primary-color;
+    border-bottom: 1px solid $primary-grey;
+    height: 50px;
+    padding: 0 20px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 2;
 
     .navbar-brand {
       color: $primary-white;
@@ -20,12 +20,12 @@
 
   .sidebar {
     border-right: 1px solid $primary-grey;
-    margin-top: 50px;
-    position: fixed;
-    min-height: 100%;
     height: 100%;
-    z-index: 2;
+    margin-top: 50px;
+    min-height: 100%;
     padding-top: 15px;
+    position: fixed;
+    z-index: 2;
 
     .nav {
       &.nav-pills {
@@ -33,14 +33,14 @@
 
         .nav-link {
           border-radius: 0;
-          padding: 0.8rem 1.5rem;
           color: $primary-black;
           font-size: 14px;
+          padding: 0.8rem 1.5rem;
 
           &.active {
             background-color: transparent;
-            color: $primary-color;
             border-left: 2px solid $primary-color;
+            color: $primary-color;
           }
 
           &:hover {
@@ -48,8 +48,8 @@
           }
 
           &.logout {
-            position: absolute;
             bottom: 50px;
+            position: absolute;
           }
         }
       }
@@ -57,8 +57,8 @@
   }
 
   .main-content {
-    margin-top: 50px;
     margin-left: 16.666667%;
+    margin-top: 50px;
     z-index: 1;
 
     .hide-lg {
@@ -73,10 +73,10 @@
       padding: 15px 20px;
 
       .card {
-        min-width: 320px;
-        max-width: 320px;
-        width: 320px;
         margin-bottom: 20px;
+        max-width: 320px;
+        min-width: 320px;
+        width: 320px;
 
         .card-image-container {
           height: 250px;
@@ -90,6 +90,7 @@
           .card-title {
             font-size: 18px;
           }
+
           .card-text {
             font-size: 14px;
             margin-bottom: 0;
@@ -100,119 +101,73 @@
   }
 
   .widget-upload-btn {
-    border-radius: 100%;
-    width: 100px;
-    height: 100px;
     border: 2px solid $secondary-grey;
+    border-radius: 100%;
+    height: 100px;
     padding: 0;
     position: relative;
+    width: 100px;
 
     i {
       color: $secondary-grey;
     }
 
     .screen {
-      border-radius: 100%;
-      width: 100px;
-      height: 100px;
       background-color: $secondary-grey;
-      opacity: 0.9;
+      border-radius: 100%;
       display: none;
+      height: 100px;
+      left: 0;
+      opacity: 0.9;
       position: absolute;
       top: 0;
-      left: 0;
+      width: 100px;
     }
 
     .image-thumbnail {
       border-radius: 100%;
-      width: 100px;
       height: 100px;
+      width: 100px;
     }
 
     &:hover {
-      border: none;
+      border: 0;
       .screen {
-        display: flex;
         color: $primary-white;
+        display: flex;
       }
     }
   }
 }
 
 @media screen and (max-width: 1024px) {
-  .admin-dashboard {
+  .user-dashboard {
     width: 100%;
 
     .btn-fit-content {
-      width: fit-content;
       flex: 1;
+      width: fit-content;
     }
 
     .completed_status {
-      position: absolute;
       bottom: 20px;
+      position: absolute;
       right: 20px;
     }
 
     .navbar {
-      padding: 10px 20px !important;
       height: fit-content !important;
+      padding: 10px 20px !important;
     }
 
     .sidebar {
-      border-right: 0 !important;
-      margin-top: 0 !important;
-      min-height: fit-content !important;
-      height: fit-content !important;
-      padding-top: 0 !important;
-      bottom: 0;
-      background: $primary-white;
-      border-top: 0.5px solid #929292;
-
-      .nav {
-        &.flex-column {
-          flex-direction: row !important;
-        }
-
-        &.nav-pills {
-          height: -webkit-fill-available;
-
-          .nav-link {
-            border-radius: 0;
-            padding: 15px 0 !important;
-            color: #999 !important;
-            font-size: 18px !important;
-            width: 100%;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-
-            &.active {
-              background-color: transparent;
-              color: $primary-color !important;
-              border-left: 0 !important;
-            }
-
-            span {
-              display: none;
-            }
-
-            &:hover {
-              color: $primary-color;
-            }
-
-            &.logout {
-              display: none;
-            }
-          }
-        }
-      }
+      display: none;
     }
 
     .main-content {
-      margin-top: 61px !important;
-      margin-left: 0 !important;
       margin-bottom: 40px;
+      margin-left: 0 !important;
+      margin-top: 61px !important;
 
       .tab-pane {
         padding: 15px 0 !important;
@@ -225,8 +180,8 @@
           padding: 0 20px !important;
 
           .card {
-            min-width: 100%;
             max-width: fit-content;
+            min-width: 100%;
             width: fit-content;
           }
         }
@@ -236,8 +191,8 @@
         }
 
         .card-container {
-          grid-template-columns: repeat(2, 48.5%) !important;
           grid-column-gap: 3%;
+          grid-template-columns: repeat(2, 48.5%) !important;
           padding: 0 20px !important;
 
           &.hide-lg {
@@ -246,19 +201,19 @@
 
           .card {
             &.order-card {
-              min-width: 100%;
               max-width: fit-content;
+              min-width: 100%;
               width: fit-content;
 
               .card-text {
                 color: #555;
-                margin-bottom: 5px;
-                font-weight: bold;
                 font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 5px;
 
                 .result {
-                  font-weight: normal;
                   font-size: 12px;
+                  font-weight: normal;
 
                   &.id {
                     color: #14acf2;
@@ -273,7 +228,7 @@
                   }
 
                   &.price {
-                    color: green;
+                    color: #008000;
                   }
                 }
               }
@@ -284,80 +239,35 @@
     }
   }
 }
+
 @media screen and (max-width: 600px) {
-  .admin-dashboard {
+  .user-dashboard {
     width: 100%;
 
     .btn-fit-content {
-      width: fit-content;
       flex: 1;
+      width: fit-content;
     }
 
     .completed_status {
-      position: absolute;
       bottom: 20px;
+      position: absolute;
       right: 20px;
     }
 
     .navbar {
-      padding: 10px 20px !important;
       height: fit-content !important;
+      padding: 10px 20px !important;
     }
 
     .sidebar {
-      border-right: 0 !important;
-      margin-top: 0 !important;
-      min-height: fit-content !important;
-      height: fit-content !important;
-      padding-top: 0 !important;
-      bottom: 0;
-      background: $primary-white;
-      border-top: 0.5px solid #929292;
-
-      .nav {
-        &.flex-column {
-          flex-direction: row !important;
-        }
-
-        &.nav-pills {
-          height: -webkit-fill-available;
-
-          .nav-link {
-            border-radius: 0;
-            padding: 15px 0 !important;
-            color: #999 !important;
-            font-size: 18px !important;
-            width: 100%;
-            flex: 1;
-            display: flex;
-            justify-content: center;
-
-            &.active {
-              background-color: transparent;
-              color: $primary-color !important;
-              border-left: 0 !important;
-            }
-
-            span {
-              display: none;
-            }
-
-            &:hover {
-              color: $primary-color;
-            }
-
-            &.logout {
-              display: none;
-            }
-          }
-        }
-      }
+      display: none;
     }
 
     .main-content {
-      margin-top: 61px !important;
-      margin-left: 0 !important;
       margin-bottom: 40px;
+      margin-left: 0 !important;
+      margin-top: 61px !important;
 
       .tab-pane {
         padding: 15px 0 !important;
@@ -370,8 +280,8 @@
           padding: 0 20px !important;
 
           .card {
-            min-width: 100%;
             max-width: fit-content;
+            min-width: 100%;
             width: fit-content;
           }
         }
@@ -390,19 +300,19 @@
 
           .card {
             &.order-card {
-              min-width: 100%;
               max-width: fit-content;
+              min-width: 100%;
               width: fit-content;
 
               .card-text {
                 color: #555;
-                margin-bottom: 5px;
-                font-weight: bold;
                 font-size: 14px;
+                font-weight: bold;
+                margin-bottom: 5px;
 
                 .result {
-                  font-weight: normal;
                   font-size: 12px;
+                  font-weight: normal;
 
                   &.id {
                     color: #14acf2;
@@ -417,7 +327,7 @@
                   }
 
                   &.price {
-                    color: green;
+                    color: #008000;
                   }
                 }
               }

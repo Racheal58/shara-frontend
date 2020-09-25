@@ -1,18 +1,29 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 
-import { isAdmin } from '../../api/helpers';
+import { isAdmin, getToken } from '../../api/helpers';
 
 const AdminRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
     render={props =>
-      isAdmin() ? (
-        <Component {...props} />
+      getToken() ? (
+        isAdmin() ? (
+          <Component {...props} />
+        ) : (
+          <Redirect
+            to={{
+              pathname: '/',
+              state: {
+                from: props.location,
+              },
+            }}
+          />
+        )
       ) : (
         <Redirect
           to={{
-            pathname: '/',
+            pathname: '/authenticate',
             state: {
               from: props.location,
             },

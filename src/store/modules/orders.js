@@ -15,8 +15,13 @@ export const getOrders = () => async dispatch => {
     } = await getAllOrdersRequest();
     dispatch({ type: GET_ORDERS_SUCCESS, payload: orders });
   } catch (error) {
-    toast.error(`${error.response.data.message}`);
-    dispatch({ type: REQUEST_ERROR, payload: error.response.data });
+    if (error.response.status === 500) {
+      toast.error('An error occured, Please reload the page and try again.');
+      dispatch({ type: REQUEST_ERROR, payload: error.response.data });
+    } else {
+      toast.error(`${error.response.data.message}`);
+      dispatch({ type: REQUEST_ERROR, payload: error.response.data });
+    }
   }
 };
 
@@ -28,8 +33,13 @@ export const getUserOrders = () => async dispatch => {
     } = await getUserOrdersRequest();
     dispatch({ type: GET_USER_ORDERS_SUCCESS, payload: orders });
   } catch (error) {
-    toast.error(`${error.response.data.message}`);
-    dispatch({ type: REQUEST_ERROR, payload: error.response.data });
+    if (error.response.status === 500) {
+      toast.error('An error occured, Please reload the page and try again.');
+      dispatch({ type: REQUEST_ERROR, payload: error.response.data });
+    } else {
+      toast.error(`${error.response.data.message}`);
+      dispatch({ type: REQUEST_ERROR, payload: error.response.data });
+    }
   }
 };
 

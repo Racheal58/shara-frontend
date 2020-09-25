@@ -2,51 +2,64 @@ import { toast } from 'react-toastify';
 
 import { authenticationRequest, registrationRequest } from '../../api/auth';
 
-import {
-  setToken,
-  // encodeUserObject
-} from '../../api/helpers';
+import { setToken, encodeUserObject } from '../../api/helpers';
+import { http } from '../../api/client';
 
-const REGISTRATION_PROCCESS = 'REGISTRATION_PROCCESS';
-const REGISTRATION_SUCCESS = 'REGISTRATION_SUCCESS';
-const REGISTRATION_ERROR = 'REGISTRATION_ERROR';
-const AUTHENTICATION_PROCCESS = 'AUTHENTICATION_PROCCESS';
-const AUTHENTICATION_SUCCESS = 'AUTHENTICATION_SUCCESS';
-const AUTHENTICATION_ERROR = 'AUTHENTICATION_ERROR';
+const REQUEST_PROCCESS = 'REQUEST_PROCCESS';
+const REQUEST_ERROR = 'REQUEST_ERROR';
+const REQUEST_SUCCESS = 'REQUEST_SUCCESS';
 
-export const register = (user, history, redirectUrl) => async dispatch => {
+export const register = (userData, history) => async dispatch => {
   try {
-    dispatch({ type: REGISTRATION_PROCCESS });
+    dispatch({ type: REQUEST_PROCCESS });
     const {
-      data: { token },
-    } = await registrationRequest(user);
-    setToken(token);
+      data: { token, user },
+    } = await registrationRequest(userData);
+    await setToken(token);
+    http.defaults.headers.Authorization = `Bearer ${token}`;
+    await encodeUserObject(user);
     dispatch({
-      type: REGISTRATION_SUCCESS,
+      type: REQUEST_SUCCESS,
+      payload: user,
     });
     toast.success('Account successfully created');
-    history.push(redirectUrl);
+
+    if (localStorage.getItem('redirectUrl')) {
+      history.push(localStorage.getItem('redirectUrl'));
+    } else {
+      history.push('/');
+    }
   } catch (error) {
-    toast.error(`${error.response.data[0].message}`);
-    dispatch({ type: REGISTRATION_ERROR, payload: error.response.data });
+    toast.error(`${error.response.data.message}`);
+    dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
 
-export const authenticate = (user, history, redirectUrl) => async dispatch => {
+export const authenticate = (userData, history) => async dispatch => {
   try {
-    dispatch({ type: AUTHENTICATION_PROCCESS });
+    dispatch({ type: REQUEST_PROCCESS });
     const {
-      data: { token },
-    } = await authenticationRequest(user);
-    setToken(token);
-    dispatch({
-      type: AUTHENTICATION_SUCCESS,
+      data: { token, user },
+    } = await authenticationRequest(userData);
+    await setToken(token);
+    http.defaults.headers.Authorization = `Bearer ${token}`;
+    await encodeUserObject(user);
+    await dispatch({
+      type: REQUEST_SUCCESS,
+      payload: user,
     });
     toast.success('You have been logged in successfully');
-    history.push(redirectUrl);
+
+    if (user.isAdmin === 'true' || user.isAdmin === true) {
+      history.push('/admin');
+    } else if (localStorage.getItem('redirectUrl')) {
+      history.push(localStorage.getItem('redirectUrl'));
+    } else {
+      history.push('/');
+    }
   } catch (error) {
-    toast.error(`${error.response.data[0].message}`);
-    dispatch({ type: AUTHENTICATION_ERROR, payload: error.response.data });
+    toast.error(`${error.response.data.message}`);
+    dispatch({ type: REQUEST_ERROR, payload: error.response.data });
   }
 };
 
@@ -54,25 +67,24 @@ const DEFAULT_STATE = {
   error: {},
   isLoading: false,
   status: undefined,
+  user: {},
 };
 
 export const authReducer = (state = DEFAULT_STATE, { type, payload }) => {
   switch (type) {
-    case REGISTRATION_PROCCESS:
-    case AUTHENTICATION_PROCCESS:
+    case REQUEST_PROCCESS:
       return {
         ...state,
         isLoading: true,
       };
-    case REGISTRATION_SUCCESS:
-    case AUTHENTICATION_SUCCESS:
+    case REQUEST_SUCCESS:
       return {
         ...state,
         isLoading: false,
         status: 'success',
+        user: payload,
       };
-    case REGISTRATION_ERROR:
-    case AUTHENTICATION_ERROR:
+    case REQUEST_ERROR:
       return {
         ...state,
         isLoading: false,

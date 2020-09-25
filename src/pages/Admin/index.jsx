@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { toast } from 'react-toastify';
-import moment from 'moment';
+import moment from 'moment/moment';
 
 // components
 import Nav from '../../components/Nav';
@@ -471,7 +471,7 @@ const Admin = props => {
               </a>
             </div>
           </div>
-          <div className="col-12 col-lg-2 px-0 main-content">
+          <div className="col-12 col-lg-10 px-0 main-content">
             <div className="tab-content" id="v-pills-tabContent">
               <div
                 className="tab-pane fade show active"

@@ -22,13 +22,7 @@ const Authentication = props => {
     e.preventDefault();
     await setDisabled(true);
 
-    let redirectUrl;
-
-    localStorage.getItem('redirectUrl')
-      ? (redirectUrl = localStorage.getItem('redirectUrl'))
-      : (redirectUrl = '/admin');
-
-    await props.authenticate({ email, password }, history, redirectUrl);
+    await props.authenticate({ email, password }, history);
     await setPassword('');
     await setDisabled(false);
   };
@@ -79,6 +73,7 @@ const Authentication = props => {
           </div>
           <button
             type="submit"
+            disabled={disabled}
             className="btn btn-custom btn-lg w-100 mb-3 d-flex justify-content-center"
           >
             {props.isLoading ? <FadeOut /> : 'Submit'}

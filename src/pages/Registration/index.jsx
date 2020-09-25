@@ -39,11 +39,6 @@ const Registration = props => {
     await setDisabled(true);
 
     const { history } = props;
-    let redirectUrl;
-
-    localStorage.getItem('redirectUrl')
-      ? (redirectUrl = localStorage.getItem('redirectUrl'))
-      : (redirectUrl = '/products');
 
     await props.register(
       {
@@ -54,7 +49,6 @@ const Registration = props => {
         phone_number: `+${phoneCode}${phone.substring(1)}`,
       },
       history,
-      redirectUrl,
     );
     await setPassword('');
   };
@@ -166,7 +160,7 @@ const Registration = props => {
               type="password"
               className="form-control"
               id="exampleInputPassword1"
-              pattern="^(?=.*?[a-z])(?=.*?[0-9]).{6,}$"
+              // pattern="^(?=.*?[a-z])(?=.*?[0-9]).{6,}$"
               onChange={e => {
                 setPassword(e.target.value);
               }}
@@ -177,6 +171,7 @@ const Registration = props => {
           </div>
           <button
             type="submit"
+            disabled={disabled}
             className="btn btn-custom btn-lg w-100 mb-3 d-flex justify-content-center"
           >
             {props.isLoading ? <FadeOut /> : 'Submit'}

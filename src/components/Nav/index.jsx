@@ -12,6 +12,7 @@ const Nav = ({ children }) => {
   if (decodeToken()) {
     first_name = decodeToken().data.first_name;
   }
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light">
       <Link className="navbar-brand" to="/">
@@ -39,7 +40,7 @@ const Nav = ({ children }) => {
                   Products
                 </Link>
               </li>
-              {isAdmin() === 'true' ? (
+              {isAdmin() ? (
                 <li className="nav-item">
                   <Link className="nav-link text-white" to="/admin">
                     Admin Dashboard
@@ -60,10 +61,10 @@ const Nav = ({ children }) => {
                 <button
                   type="button"
                   onClick={() => logout()}
-                  className="btn btn-transparent nav-link text-white ml-0 ml-lg-3"
+                  className="btn btn-transparent nav-link text-white ml-0 ml-lg-5 border-0"
                   to="/products"
                 >
-                  <i className="fas fa-sign-out-alt mr-3" />
+                  <i className="fas fa-sign-out-alt mr-2" />
                   Logout
                 </button>
               </li>

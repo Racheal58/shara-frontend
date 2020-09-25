@@ -1,14 +1,19 @@
 import axios from 'axios';
 import { getToken } from './helpers';
 
-let Authorization;
-if (getToken()) {
-  Authorization = { Authorization: `Bearer ${getToken()}` };
-}
+let http;
 
-export const http = axios.create({
-  // attach api base url here
-  baseURL: 'http://127.0.0.1:3333/api/v1',
-  // baseURL: 'https://shara-api.herokuapp.com/api/v1',
-  headers: { ...Authorization },
-});
+(async () => {
+  let Authorization;
+
+  if (getToken()) {
+    Authorization = { Authorization: `Bearer ${getToken()}` };
+  }
+
+  http = axios.create({
+    baseURL: 'http://127.0.0.1:3333/api/v1',
+    headers: { ...Authorization },
+  });
+})();
+
+export { http };

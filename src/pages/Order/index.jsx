@@ -27,6 +27,8 @@ const Order = ({
 }) => {
   const [editItemQuantity, setEditItemQuantity] = React.useState(0);
   const [editItemId, setEditItemId] = React.useState(0);
+  const [disabled, setDisabled] = React.useState(false);
+
   React.useEffect(() => {
     const fetchUserOrder = async () => {
       await getUserOrderFunction();
@@ -36,11 +38,14 @@ const Order = ({
   }, []);
 
   const handleQuantityChange = (itemQuantity, productId) => {
+    setDisabled(true);
     setEditItemQuantity(itemQuantity);
     setEditItemId(productId);
+    setDisabled(false);
   };
 
   const handleCompleteUserOrderFunction = async () => {
+    await setDisabled(true);
     await completeUserOrderFunction(userOrder._id);
     history.redirect('/dashboard');
   };
@@ -79,30 +84,31 @@ const Order = ({
                   <td>{item.name}</td>
                   <td>{item.description}</td>
                   <td className="text-right">
-                    {Number(item.quantity)}
                     <button
                       type="button"
-                      className="btn btn-custom w-100"
+                      className="btn btn-transparent border-0 d-flex"
                       data-toggle="modal"
                       data-target="#exampleModal"
                       onClick={() =>
                         handleQuantityChange(item.quantity, item._id)
                       }
                     >
-                      <i className="fas fa-pen" />
+                      <p className="text-custom">{Number(item.quantity)}</p>
+                      <i className="fas fa-pen text-custom fa-sm ml-2" />
                     </button>
                   </td>
-                  <td className="text-right">
+                  <td className="text-right text-success">
                     {parseInt(item.price).toLocaleString()}
                   </td>
-                  <td className="text-right">
-                    {Number(item.price.toLocaleString()) *
-                      Number(item.quantity)}
+                  <td className="text-right text-success">
+                    {parseInt(
+                      Number(item.price) * Number(item.quantity),
+                    ).toLocaleString()}
                   </td>
                   <td>
                     <button
                       type="button"
-                      className="btn btn-transparent w-100"
+                      className="btn btn-transparent w-100 border-0"
                       onClick={() =>
                         removeProductFromOrderFunction(userOrder._id, item._id)
                       }
@@ -236,6 +242,7 @@ const Order = ({
         <button
           type="button"
           className="btn btn-custom"
+          disabled={disabled}
           onClick={() => handleCompleteUserOrderFunction()}
         >
           Complete Order

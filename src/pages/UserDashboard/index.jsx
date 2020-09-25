@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
+import moment from 'moment/moment';
 
 // components
 import Nav from '../../components/Nav';
@@ -18,6 +18,7 @@ const UserDashboard = props => {
     const fetchOrders = async () => {
       await props.getUserOrders();
     };
+
     fetchOrders();
   }, []);
 
@@ -25,7 +26,7 @@ const UserDashboard = props => {
     products.reduce((a, b) => a + Number(b.price * b.quantity), 0);
 
   return (
-    <section className="admin-dashboard">
+    <section className="user-dashboard">
       <div>
         <Nav />
       </div>

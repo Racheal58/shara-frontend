@@ -66,8 +66,8 @@ const Products = props => {
                 <div className="card-body">
                   <h5 className="card-title">{product.name}</h5>
                   <p className="card-text">{product.description}</p>
-                  <p className="card-text">
-                    Price: &#8358;{parseInt(product.price).toLocaleString()}
+                  <p className="card-text price">
+                    &#8358;{parseInt(product.price).toLocaleString()}
                   </p>
                 </div>
                 <div className="card-footer bg-transparent d-flex justify-content-between">

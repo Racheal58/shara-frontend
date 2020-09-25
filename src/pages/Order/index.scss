@@ -1,6 +1,10 @@
 @import '../../assets/scss/';
 
 .orders {
+  .btn-fit-content {
+    width: fit-content;
+    flex: 1;
+  }
   .navbar {
     border-bottom: 1px solid $primary-grey;
     position: fixed;
@@ -58,6 +62,46 @@
     align-items: center;
     padding: 0 20%;
     border-top: 1px solid $primary-color;
+
+    .btn {
+      min-width: 200px;
+      width: fit-content;
+    }
+  }
+}
+
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+  .orders {
+    .btn-fit-content {
+      width: fit-content;
+      flex: 1;
+    }
+    .navbar {
+      padding: 10px 20px !important;
+      height: fit-content !important;
+
+      .navbar-brand {
+        color: $primary-white;
+      }
+    }
+
+    .order-container {
+      padding: 15px 20px;
+      margin-top: 61px;
+    }
+
+    .footer {
+      width: 100%;
+      position: fixed;
+      bottom: 0;
+      background-color: $primary-white;
+      height: 50px;
+      display: flex;
+      justify-content: center !important;
+      align-items: center;
+      padding: 0 !important;
+      border-top: 1px solid $primary-color;
+    }
   }
 }
 

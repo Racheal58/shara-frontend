@@ -40,13 +40,18 @@ const Registration = props => {
 
     const { history } = props;
 
+    const phone_number =
+      Number(phone.charAt(0)) === 0
+        ? `+${phoneCode}${phone.substring(1)}`
+        : `+${phoneCode}${phone}`;
+
     await props.register(
       {
         first_name: firstName,
         last_name: lastName,
         email,
         password,
-        phone_number: `+${phoneCode}${phone.substring(1)}`,
+        phone_number,
       },
       history,
     );

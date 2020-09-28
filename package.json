@@ -1,5 +1,5 @@
 {
-  "name": "fe-react-redux",
+  "name": "shara-frontend",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -31,7 +31,7 @@
     "lint": "node_modules/eslint/bin/eslint.js --fix",
     "sass:lint": "sass-lint 'src/**/*.scss' -q -v && sass-lint-auto-fix"
   },
-  "author": "Enle Technologies",
+  "author": "Racheal",
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.4.4",
